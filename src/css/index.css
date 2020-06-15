@@ -1,6 +1,8 @@
+
+/* Fonts */
 @font-face {
   font-family: "Restora";
-  src: url(../assets/font/restoraextralight-1-webfont.woff2)
+  src: url(../../assets/font/restoraextralight-1-webfont.woff2)
 }
 
 body {
@@ -13,7 +15,7 @@ body {
                Arial,
                sans-serif;
   margin: auto;
-  max-width: 38rem;
-  padding: 2rem;
+  /* max-width: 38rem;
+  padding: 2rem; */
   font-size: 1.2em;
 }

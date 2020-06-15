@@ -3,7 +3,7 @@
   "productName": "The Chef's Pocket",
   "version": "0.0.1",
   "description": "A handy pocket cookbook with a helpful shopping list",
-  "main": "src/index.js",
+  "main": "src/js/index.js",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
@@ -46,7 +46,10 @@
   },
   "dependencies": {
     "bootstrap": "^4.5.0",
-    "electron-squirrel-startup": "^1.0.0"
+    "electron-squirrel-startup": "^1.0.0",
+    "jquery": "^3.5.1",
+    "material-design-icons": "^3.0.1",
+    "popper.js": "^1.16.1"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.51",
