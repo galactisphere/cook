@@ -11,6 +11,10 @@ sass.render({
 });
 */
 
+// Express
+var express = require("express");
+var expressApp = express();
+
 // Enable live reload for all the files in the project directory
 require("electron-reload")(__dirname);
 
@@ -62,6 +66,22 @@ app.on("activate", () => {
 });
 
 // In this file you can include the rest of your app"s specific main process code. You can also put them in separate files and import them here.
+
+// Express
+expressApp.listen(3000, function () {
+    console.log('Example app listening on port 3000!');
+});
+
+expressApp.post('saveFile', function(req, res) {
+  fs.writeFile("data.txt", req.body.data, function(err) {
+      if(err) {
+          return console.log(err);
+      }
+
+      console.log("The file was saved!");
+      res.end("This message will be sent back to the client!");
+  }); 
+});
 
 // Print user path to console
 console.log(app.getPath('userData'));

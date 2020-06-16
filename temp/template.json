@@ -1,0 +1,12 @@
+{
+  "Title": "Test File",
+  "Ingredients": ["Ingredient 1", "Ingredient 2", "Ingredient 3"],
+  "Method": {
+    "1": "Step 1",
+    "2": "Step 2",
+    "3": "Step 3",
+    "4": "Step 4",
+    "5": "Step 5"
+  },
+  "Extras": ["Source: Test", "Date Created: 15/06/2020", "Other Notes: TEST ONLY"]
+}

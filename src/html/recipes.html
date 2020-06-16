@@ -19,6 +19,21 @@
 </head>
 
 <body>
+
+	<script>
+		$(document).ready(function () {
+			var text;
+			$('form').submit(function (event) {
+				text = $(this).serializeArray();
+				// Send data to server
+				$.post('/saveFile', {
+					data: text
+				});
+				event.preventDefault();
+			});
+		});
+	</script>
+
 	<!-- Navigation -->
 	<nav class="navbar navbar-expand-md navbar-light bg-light">
 		<a class="navbar-brand" href="#">Pocket</a>
