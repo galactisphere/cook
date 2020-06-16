@@ -19,7 +19,6 @@
 </head>
 
 <body>
-
 	<!-- Navigation -->
 	<nav class="navbar navbar-expand-md navbar-light bg-light">
 		<a class="navbar-brand" href="#">Pocket</a>
@@ -29,29 +28,17 @@
 		</button>
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<!--
-			<ul class="navbar-nav nav nav-pills">
-				<li class="nav-item active">
-					<a class="nav-link active" id="tab-1" data-toggle="tab" role="tab" href="#content-1" aria-selected="true" aria-controls="content-1">Content 1</a>
-				</li>
+			<ul class="navbar-nav mr-auto">
 				<li class="nav-item">
-					<a class="nav-link" id="tab-2" data-toggle="tab" role="tab" href="#content-2" aria-selected="false" aria-controls="content-2">Content 2</a>
-				</li>
-			</ul>
-			-->
-
-			<ul class="navbar-nav mr-auto nav nav-pills">
-				<li class="nav-item active">
-					<a class="nav-link" href="index.html">Home</a>
+					<a class="nav-link" href="index.html">Home <span class="sr-only"></a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="shopping.html">Shopping</a>
 				</li>
-				<li class="nav-item">
+				<li class="nav-item active">
 					<a class="nav-link" href="recipes.html">Add recipe</a>
 				</li>
 			</ul>
-
 			<form class="form-inline my-2 my-lg-0">
 				<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -59,8 +46,34 @@
 		</div>
 	</nav>
 
-
-
+	<!-- Main content -->
+	<div class="container mt-5">
+		<form>
+			<div class="form-group row">
+				<label for="title" class="col-sm-2 col-form-label">Recipe title</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="title" placeholder="Recipe title">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="ingredients" class="col-sm-2 col-form-label">Ingredients</label>
+				<div class="col-sm-10">
+					<textarea class="form-control" id="ingredients" rows="6"></textarea>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="method" class="col-sm-2 col-form-label">Method</label>
+				<div class="col-sm-10">
+					<textarea class="form-control" id="method" rows="10"></textarea>
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-sm-10">
+					<button type="submit" class="btn btn-primary" id="submit">Add recipe</button>
+				</div>
+			</div>
+		</form>
+	</div>
 </body>
 
 </html>

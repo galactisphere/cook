@@ -1,4 +1,3 @@
-
 /* Fonts */
 @font-face {
   font-family: "Serif1";
@@ -6,8 +5,7 @@
 }
 
 body {
-  font-family: Serif1,
-               -apple-system,
+  font-family: -apple-system,
                BlinkMacSystemFont,
                "Segoe UI",
                Roboto,
@@ -18,4 +16,12 @@ body {
   max-width: 50rem;
   padding: 1rem;
   font-size: 1rem;
+}
+
+/* Navigation */
+nav {
+  /*font-family: Serif1;*/
+}
+nav li.active {
+  font-weight: bold;
 }

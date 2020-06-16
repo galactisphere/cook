@@ -4,6 +4,13 @@ const {
 } = require("electron");
 const path = require("path");
 
+/*
+const sass = require('node-sass');
+sass.render({
+  file: "../css/index.scss"
+});
+*/
+
 // Enable live reload for all the files in the project directory
 require("electron-reload")(__dirname);
 
@@ -17,6 +24,9 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
+    titleBarStyle: "hiddenInset",
+    // frame: false,
+    autoHideMenuBar: true
   });
 
   // Define browser window as session
