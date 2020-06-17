@@ -4,13 +4,6 @@ const {
 } = require("electron");
 const path = require("path");
 
-/*
-const sass = require('node-sass');
-sass.render({
-  file: "../css/index.scss"
-});
-*/
-
 // Enable live reload for all the files in the project directory
 require("electron-reload")(__dirname);
 
@@ -29,14 +22,17 @@ const createWindow = () => {
     autoHideMenuBar: true
   });
 
+  // Run node js server
+  let server = require("./server/server.js")
+
   // Define browser window as session
   // const mainSession = mainWindow.webContents.session
 
   // Load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, "../html/index.html"));
+  mainWindow.loadFile(path.join(__dirname, "src/html/index.html"));
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 };
 
 // This method will be called when Electron has finished
@@ -62,6 +58,19 @@ app.on("activate", () => {
 });
 
 // In this file you can include the rest of your app"s specific main process code. You can also put them in separate files and import them here.
+
+/*
+expressApp.post('saveFile', function(req, res) {
+  fs.writeFile("data.txt", req.body.data, function(err) {
+      if(err) {
+          return console.log(err);
+      }
+
+      console.log("The file was saved!");
+      res.end("This message will be sent back to the client!");
+  }); 
+});
+*/
 
 // Print user path to console
 console.log(app.getPath('userData'));

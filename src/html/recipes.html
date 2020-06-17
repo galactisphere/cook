@@ -6,7 +6,7 @@
 	<title>The Chef's Pocket</title>
 
 	<!-- jQuery -->
-	<script src="../../node_modules/jquery/dist/jquery.slim.min.js"></script>
+	<script src="../../node_modules/jquery/dist/jquery.min.js"></script>
 	<!-- popper.js -->
 	<script src="../../node_modules/popper.js/dist/popper.min.js"></script>
 	<!-- Bootstrap CSS -->
@@ -16,9 +16,45 @@
 
 	<!-- Main spreadsheet -->
 	<link rel="stylesheet" href="../css/index.css">
+
+	<script>
+		/*
+		$("form#submit").click(function () {
+			$.ajax({
+				url: '/ajax',
+				type: 'POST',
+				cache: false,
+				data: {
+					field1: 1,
+					field2: 2
+				},
+				success: function (data) {
+					alert('Success!')
+				},
+				error: function (jqXHR, textStatus, err) {
+					alert('text status ' + textStatus + ', err ' + err)
+				}
+			});
+		});
+
+		$(document).ready(function () {
+			var text;
+			$('form').submit(function (event) {
+				text = $(this).serializeArray();
+				// Send data to server
+				$.post('/saveFile', {
+					data: text
+				});
+				event.preventDefault();
+			});
+		});
+		*/
+	</script>
+
 </head>
 
 <body>
+
 	<!-- Navigation -->
 	<nav class="navbar navbar-expand-md navbar-light bg-light">
 		<a class="navbar-brand" href="#">Pocket</a>
@@ -47,32 +83,58 @@
 	</nav>
 
 	<!-- Main content -->
-	<div class="container mt-5">
-		<form>
+	<div class="container mt-4">
+		<!-- Form -->
+		<form action="/save" method="POST" id="form">
 			<div class="form-group row">
-				<label for="title" class="col-sm-2 col-form-label">Recipe title</label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" id="title" placeholder="Recipe title">
+				<label for="title" class="col-sm-3 col-form-label">Recipe title</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" id="title" placeholder="Recipe title" name="recipe">
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="ingredients" class="col-sm-2 col-form-label">Ingredients</label>
-				<div class="col-sm-10">
-					<textarea class="form-control" id="ingredients" rows="6"></textarea>
+				<label for="ingredients" class="col-sm-3 col-form-label">Ingredients<span
+						class="text-secondary"><small><br>Enter a new line for each new ingredient</span></small></label>
+				<div class="col-sm-9">
+					<textarea class="form-control" id="ingredients" rows="6" placeholder="Ingredients" name="ingredients"></textarea>
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="method" class="col-sm-2 col-form-label">Method</label>
-				<div class="col-sm-10">
-					<textarea class="form-control" id="method" rows="10"></textarea>
+				<label for="method" class="col-sm-3 col-form-label">Method<span class="text-secondary"><small><br>Enter a new line for each new step and do not include numbering</span></small></label>
+				<div class="col-sm-9">
+					<textarea class="form-control" id="method" rows="10" placeholder="Method" name="method"></textarea>
 				</div>
 			</div>
 			<div class="form-group row">
 				<div class="col-sm-10">
-					<button type="submit" class="btn btn-primary" id="submit">Add recipe</button>
+					<button type="submit" class="btn btn-primary" id="submit" onsubmit="return false">Add recipe</button>
 				</div>
 			</div>
 		</form>
+
+		<script>
+			$(document).ready(function () {
+				var data;
+				$("#form").submit(function (event) {
+					event.preventDefault();
+					data = $(this).serializeArray();
+					console.log(data);
+
+					$.ajax({
+						url: "http://localhost:3000/save",
+						type: "POST",
+						dataType: "json",
+						data: data,
+						success: function () {
+							console.log("Success");
+						},
+						error: function () {
+							console.log("Error");
+						}
+					});
+				});
+			});
+		</script>
 	</div>
 </body>
 
