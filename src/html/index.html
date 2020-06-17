@@ -22,24 +22,13 @@
 
 	<!-- Navigation -->
 	<nav class="navbar navbar-expand-md navbar-light bg-light">
-		<a class="navbar-brand" href="#">Pocket</a>
+		<a class="navbar-brand" href="index.html">Pocket</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<!--
-			<ul class="navbar-nav nav nav-pills">
-				<li class="nav-item active">
-					<a class="nav-link active" id="tab-1" data-toggle="tab" role="tab" href="#content-1" aria-selected="true" aria-controls="content-1">Content 1</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" id="tab-2" data-toggle="tab" role="tab" href="#content-2" aria-selected="false" aria-controls="content-2">Content 2</a>
-				</li>
-			</ul>
-			-->
-
 			<ul class="navbar-nav mr-auto nav nav-pills">
 				<li class="nav-item active">
 					<a class="nav-link" href="index.html">Home</a>
@@ -48,7 +37,7 @@
 					<a class="nav-link" href="shopping.html">Shopping</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="recipes.html">Add recipe</a>
+					<a class="nav-link" href="addRecipe.html">Add recipe</a>
 				</li>
 			</ul>
 
@@ -59,8 +48,56 @@
 		</div>
 	</nav>
 
+	<div class="container mt-4">
+		<div class="list-group">
+			<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				<div class="d-flex w-100 justify-content-between">
+					<h5 class="mb-1 title"><b>Title</b></h5>
+				</div>
+				<p class="mb-1">Example description
+				</p>
+			</a>
+		</div>
+	</div>
+
+	<script>
+		/*
+		$.getJSON("../../db.json")
+		 .done(
+			 function(data) {
+				 $.each(data.items, function(i, item) {
+					var title = item.title
+					var description = item.description
+				 })
+
+				 // Append to page
+				 var title = $(
+					 "<div/>", {
+						 "class": "title",
+						 "text": title
+					 }
+				 ).appendTo("container")
+			 }
+		 )
 
 
+		 $.getJSON("../../db.json", function(data){
+			 
+		 })
+		 */
+
+		$.getJSON("../../db.json", function (data) {
+			var items = [];
+			$.each(data.recipes, function (key, val) {
+				items.push("<li id='" + key + "'>" + val.data + " " + val.type + "</li>");
+			});
+
+			$("<ul/>", {
+				"class": "my-new-list",
+				html: items.join("")
+			}).appendTo("body");
+		});
+	</script>
 </body>
 
 </html>

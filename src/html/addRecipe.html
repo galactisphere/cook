@@ -16,48 +16,13 @@
 
 	<!-- Main spreadsheet -->
 	<link rel="stylesheet" href="../css/index.css">
-
-	<script>
-		/*
-		$("form#submit").click(function () {
-			$.ajax({
-				url: '/ajax',
-				type: 'POST',
-				cache: false,
-				data: {
-					field1: 1,
-					field2: 2
-				},
-				success: function (data) {
-					alert('Success!')
-				},
-				error: function (jqXHR, textStatus, err) {
-					alert('text status ' + textStatus + ', err ' + err)
-				}
-			});
-		});
-
-		$(document).ready(function () {
-			var text;
-			$('form').submit(function (event) {
-				text = $(this).serializeArray();
-				// Send data to server
-				$.post('/saveFile', {
-					data: text
-				});
-				event.preventDefault();
-			});
-		});
-		*/
-	</script>
-
 </head>
 
 <body>
 
 	<!-- Navigation -->
 	<nav class="navbar navbar-expand-md navbar-light bg-light">
-		<a class="navbar-brand" href="#">Pocket</a>
+		<a class="navbar-brand" href="index.html">Pocket</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -72,7 +37,7 @@
 					<a class="nav-link" href="shopping.html">Shopping</a>
 				</li>
 				<li class="nav-item active">
-					<a class="nav-link" href="recipes.html">Add recipe</a>
+					<a class="nav-link" href="addRecipe.html">Add recipe</a>
 				</li>
 			</ul>
 			<form class="form-inline my-2 my-lg-0">
@@ -90,6 +55,13 @@
 				<label for="title" class="col-sm-3 col-form-label">Recipe title</label>
 				<div class="col-sm-9">
 					<input type="text" class="form-control" id="title" placeholder="Recipe title" name="recipe">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="description" class="col-sm-3 col-form-label">Description<span
+						class="text-secondary"><small><br>Add a short description for your recipe</span></small></label>
+				<div class="col-sm-9">
+					<textarea class="form-control" id="description" rows="3" placeholder="Description" name="description"></textarea>
 				</div>
 			</div>
 			<div class="form-group row">
