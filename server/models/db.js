@@ -1,7 +1,7 @@
 const low = require('lowdb')
 const FileSync = require('lowdb/adapters/FileSync')
  
-const adapter = new FileSync('db.json')
+const adapter = new FileSync('db/db.json')
 const db = low(adapter)
  
 
@@ -29,7 +29,7 @@ module.exports.read = function(data) {
   db.get("recipes")
     .push(data)
     .write()
-  console.log("Added json to database")
+  console.log("Added json to db")
 }
 
 // Delete the entire database

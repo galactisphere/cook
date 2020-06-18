@@ -4,16 +4,38 @@ const express = require('express'),
     port    = parseInt(process.env.PORT, 10) || 3000;
 
 const db = require("./models/db")
-const bodyParser = require("body-parser")
+const bodyParser = require("body-parser");
+const fs = require('fs');
 
 app.use(bodyParser.json({}))
 app.use(bodyParser.urlencoded({extended: false}))
 
 // POST request for save
 app.post("/save", function(req, res) {
-  //db.purge()
+
+  // var data = JSON.parse(req.body)
+  //console.log(data)
+
   console.log(req.body)
   db.read(req.body)
+
+
+  var filename = 0
+
+  function writeFile() {
+    fs.writeFile(__dirname + "/../db/" + filename + ".json", req.body, { flag: "wx" }, function(err) {
+      if (err) {
+        console.log(filename.toString())
+        filename = filename + 1
+        writeFile()
+      } else {
+        console.log("Written " + filename.toString() + ".json to /db directory")
+      }
+    })
+  }
+
+
+  writeFile()
 });
 
 app.listen(port, function() {

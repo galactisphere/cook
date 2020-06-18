@@ -1,3 +1,5 @@
+// Index -- initial to run when app launches
+
 const {
   app,
   BrowserWindow
@@ -15,7 +17,7 @@ if (require("electron-squirrel-startup")) { // eslint-disable-line global-requir
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 800,
+    width: 1100,
     height: 600,
     titleBarStyle: "hiddenInset",
     // frame: false,
@@ -25,7 +27,10 @@ const createWindow = () => {
   });
 
   // Run node js server
-  const server = require("./server/server.js")
+  const server = require("./server/server")
+
+  // Add handlebars
+  const handlebars = require("./src/js/handlebars")
 
   // Define browser window as session
   // const mainSession = mainWindow.webContents.session

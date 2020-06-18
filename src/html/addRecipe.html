@@ -52,9 +52,10 @@
 		<!-- Form -->
 		<form action="/save" method="POST" id="form">
 			<div class="form-group row">
-				<label for="title" class="col-sm-3 col-form-label">Recipe title</label>
+				<label for="title" class="col-sm-3 col-form-label">Recipe title<span
+						class="text-secondary"><small><br>Max. 100 characters</span></small></label>
 				<div class="col-sm-9">
-					<input type="text" class="form-control" id="title" placeholder="Recipe title" name="recipe">
+					<input type="text" class="form-control" id="title" placeholder="Recipe title" name="recipe" maxlength="100">
 				</div>
 			</div>
 			<div class="form-group row">
@@ -101,12 +102,14 @@
 						url: "http://localhost:3000/save",
 						type: "POST",
 						dataType: "json",
+						contentType: "json",
+						//data: JSON.stringify(data),
 						data: data,
 						success: function () {
-							console.log("Success");
+							console.log("POST success");
 						},
 						error: function () {
-							console.log("Error");
+							console.log("POST error");
 						}
 					});
 				});
