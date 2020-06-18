@@ -85,13 +85,18 @@
 		</form>
 
 		<script>
+			// Submit html form to express.js server
 			$(document).ready(function () {
 				var data;
 				$("#form").submit(function (event) {
+
+					// Prevent webpage reload
 					event.preventDefault();
+
 					data = $(this).serializeArray();
 					console.log(data);
 
+					// POST request to server
 					$.ajax({
 						url: "http://localhost:3000/save",
 						type: "POST",

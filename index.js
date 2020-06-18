@@ -19,11 +19,13 @@ const createWindow = () => {
     height: 600,
     titleBarStyle: "hiddenInset",
     // frame: false,
-    autoHideMenuBar: true
+    autoHideMenuBar: true,
+    minWidth: 500,
+    minHeight: 600
   });
 
   // Run node js server
-  let server = require("./server/server.js")
+  const server = require("./server/server.js")
 
   // Define browser window as session
   // const mainSession = mainWindow.webContents.session

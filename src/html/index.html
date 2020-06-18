@@ -13,6 +13,8 @@
 	<link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
 	<!-- Bootstrap JS -->
 	<script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	<!-- json2html -->
+	<script src="../../node_modules/node-json2html/json2html.js"></script>
 
 	<!-- Main spreadsheet -->
 	<link rel="stylesheet" href="../css/index.css">
@@ -50,7 +52,7 @@
 
 	<div class="container mt-4">
 		<div class="list-group">
-			<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+			<a href="recipe.html" class="list-group-item list-group-item-action flex-column align-items-start recipeList">
 				<div class="d-flex w-100 justify-content-between">
 					<h5 class="mb-1 title"><b>Title</b></h5>
 				</div>
@@ -61,31 +63,6 @@
 	</div>
 
 	<script>
-		/*
-		$.getJSON("../../db.json")
-		 .done(
-			 function(data) {
-				 $.each(data.items, function(i, item) {
-					var title = item.title
-					var description = item.description
-				 })
-
-				 // Append to page
-				 var title = $(
-					 "<div/>", {
-						 "class": "title",
-						 "text": title
-					 }
-				 ).appendTo("container")
-			 }
-		 )
-
-
-		 $.getJSON("../../db.json", function(data){
-			 
-		 })
-		 */
-
 		$.getJSON("../../db.json", function (data) {
 			var items = [];
 			$.each(data.recipes, function (key, val) {
@@ -97,6 +74,23 @@
 				html: items.join("")
 			}).appendTo("body");
 		});
+	</script>
+
+	<script>
+		let template = {
+			'<>': 'div',
+			'html': '${title} ${year}'
+		};
+
+		let data = $.getJSON("../../db.json")
+
+		console.log(data)
+
+		//native javascript
+		document.write(json2html.transform(data, template));
+
+		//or with jQuery
+		$("#result").json2html(data, template);
 	</script>
 </body>
 

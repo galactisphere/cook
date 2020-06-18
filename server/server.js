@@ -1,3 +1,4 @@
+// Define defaults
 const express = require('express'),
     app     = express(),
     port    = parseInt(process.env.PORT, 10) || 3000;
@@ -5,10 +6,10 @@ const express = require('express'),
 const db = require("./models/db")
 const bodyParser = require("body-parser")
 
-  app.use(bodyParser.json({}))
-  app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json({}))
+app.use(bodyParser.urlencoded({extended: false}))
 
-
+// POST request for save
 app.post("/save", function(req, res) {
   //db.purge()
   console.log(req.body)
