@@ -1,39 +1,42 @@
 // Define defaults
 const express = require('express'),
-    app     = express(),
-    port    = parseInt(process.env.PORT, 10) || 3000;
+    	app     = express(),
+   		port    = parseInt(process.env.PORT, 10) || 3000;
 
 const db = require("./models/db")
 const bodyParser = require("body-parser");
 const fs = require('fs');
+const remote = require("electron")
 
 app.use(bodyParser.json({}))
 app.use(bodyParser.urlencoded({extended: false}))
 
+const documentsDir = remote.getPath("documents")
+
 // POST request for save
 app.post("/save", function(req, res) {
 
-  // var data = JSON.parse(req.body)
-  //console.log(data)
+  var data = JSON.stringify(req.body)
+	var parsedData = JSON.parse(data)
 
-  console.log(req.body)
-  db.read(req.body)
+  db.read(data)
 
-
-  var filename = 0
-
+  var indexNum = 1
   function writeFile() {
-    fs.writeFile(__dirname + "/../db/" + filename + ".json", req.body, { flag: "wx" }, function(err) {
+		if (parsedData.recipe == "") {
+			var filename = documentsDir + "/The Chef's Pocket/Untitled " + indexNum.toString() + ".json"
+		} else {
+			var filename = documentsDir + "/The Chef's Pocket/" + parsedData.recipe + " " + indexNum.toString() + ".json"
+		}
+    fs.writeFile(filename, data, { flag: "wx" }, function(err) {
       if (err) {
-        console.log(filename.toString())
-        filename = filename + 1
+        indexNum = indexNum + 1
         writeFile()
       } else {
-        console.log("Written " + filename.toString() + ".json to /db directory")
+        console.log("Written " + filename + " to /db directory")
       }
     })
   }
-
 
   writeFile()
 });
