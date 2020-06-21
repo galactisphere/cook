@@ -1,8 +1,8 @@
 {
-  "name": "cook",
+  "name": "the-chefs-pocket",
   "productName": "The Chef's Pocket",
-  "version": "0.0.1",
-  "description": "A handy pocket cookbook with a helpful shopping list",
+  "version": "0.1.0",
+  "description": "A handy pocket cookbook for the amateur to the professional chef",
   "main": "index.js",
   "scripts": {
     "start": "electron-forge start",
@@ -21,12 +21,14 @@
   "license": "MIT",
   "config": {
     "forge": {
-      "packagerConfig": {},
+      "packagerConfig": {
+        "executableName": "the-chefs-pocket"
+      },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "cook"
+            "name": "the-chefs-pocket"
           }
         },
         {

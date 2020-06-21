@@ -7,7 +7,7 @@ const {
 const path = require("path");
 
 // Enable live reload for all the files in the project directory
-require("electron-reload")(__dirname);
+// require("electron-reload")(__dirname);
 
 // Export
 module.exports.path = function(path) {

@@ -9,8 +9,6 @@ const fse = require('fs-extra')
 const electron = require("../index");
 const Lowdb = require('lowdb');
 
-app.set("view engine", "pug")
-
 //var remote = require("electron").remote
 
 app.use(bodyParser.json({}))
@@ -60,7 +58,7 @@ app.post("/delete", function(req, res){
 
 // GET db
 app.get("/db/get", function(req, res){
-  res.send(fse.readJSONSync("db/db.json"))
+  res.send(fse.readJSONSync(__dirname + "/../db/db.json"))
 })
 
 // GET path
