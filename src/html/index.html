@@ -38,9 +38,6 @@
 					<a class="nav-link" href="index.html">Home</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="shopping.html">Shopping</a>
-				</li>
-				<li class="nav-item">
 					<a class="nav-link" href="addRecipe.html">Add recipe</a>
 				</li>
 			</ul>
@@ -52,64 +49,64 @@
 		</div>
 	</nav>
 
-	<script id="entry" type="text/x-handlebars-template">
-		<div class="container mt-4">
-			{{#each recipes}}
-				<div class="list-group">
-					<a href="recipe.html" class="list-group-item list-group-item-action flex-column align-items-start recipeList">
-						<div class="d-flex w-100 justify-content-between">
-							<h5 class="mb-1 title"><b>{{title}}</b></h5>
-						</div>
-						<p class="mb-1">{{description}}</p>
-					</a>
+	<div class="container mt-4">
+		<script id="entry" type="text/x-handlebars-template">
+			
+			<div class="card-columns">
+				{{#each recipes}}
+				<div class="card mb-3">
+					<div class="card-body">
+						<a href="../html/recipe.html?id={{title}}" class="list-group-item-action">
+							<h5 class="card-title"><b>{{title}}</b></h5>
+							<p class="card-text">{{description}}</p>
+						</a>
+					</div>
 				</div>
-			{{/each}}
-		</div>
+				{{/each}}
+			</div>
+				
+			
 	</script>
+	</div>
 
 	<script>
+
+		var data, path
+
+		$.ajax({
+			"async": false,
+			"type": "GET",
+			"global": "false",
+			"datatype": "json",
+			"url": "http://localhost:3000/db/get",
+			"success": function (e) {
+				data = JSON.stringify(e)
+			}
+		})
+
+		$.ajax({
+			"async": false,
+			"type": "GET",
+			"global": "false",
+			"datatype": "text",
+			"url": "http://localhost:3000/path",
+			"success": function (e) {
+				path = e
+			}
+		})
+
 		var source = document.getElementById("entry").innerHTML
+		console.dir(source)
+
 		var template = Handlebars.compile(source)
-		var data = $.getJSON("../../db.json")
-		var html = template(data)
-		console.log(data)
-		document.getElementById("entry") = html
+		var parsedData = JSON.parse(data)
+		var updatedData = $.extend(parsedData, { "path": path })
+
+		var result = template(updatedData)
+
+		document.getElementById("entry").outerHTML = result
 	</script>
 
-	<script>
-		/*
-		$.getJSON("../../db.json", function (data) {
-			var items = [];
-			$.each(data.recipes, function (key, val) {
-				items.push("<li id='" + key + "'>" + val.data + " " + val.type + "</li>");
-			});
-
-			$("<ul/>", {
-				"class": "my-new-list",
-				html: items.join("")
-			}).appendTo("body");
-		});
-		*/
-	</script>
-
-	<script>
-		/*
-		let template = {
-			'<>': 'div',
-			'html': '${title} ${year}'
-		};
-
-		let data = $.getJSON("../../db.json")
-
-		console.log(data)
-
-		//native javascript
-		document.write(json2html.transform(data, template));
-
-		//or with jQuery
-		$("#result").json2html(data, template);
-		*/
-	</script>
 </body>
 
 </html>

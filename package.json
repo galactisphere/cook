@@ -52,10 +52,10 @@
     "bootstrap-icons": "^1.0.0-alpha4",
     "electron-squirrel-startup": "^1.0.0",
     "express": "^4.17.1",
+    "fs-extra": "^9.0.1",
     "handlebars": "^4.7.6",
     "jquery": "^3.5.1",
     "lowdb": "^1.0.0",
-    "node-json2html": "^1.4.0",
     "popper.js": "^1.16.1"
   },
   "devDependencies": {

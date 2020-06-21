@@ -33,9 +33,6 @@
 				<li class="nav-item">
 					<a class="nav-link" href="index.html">Home <span class="sr-only"></a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="shopping.html">Shopping</a>
-				</li>
 				<li class="nav-item active">
 					<a class="nav-link" href="addRecipe.html">Add recipe</a>
 				</li>
@@ -51,33 +48,60 @@
 	<div class="container mt-4">
 		<!-- Form -->
 		<form action="/save" method="POST" id="form">
+			<!-- Title -->
 			<div class="form-group row">
-				<label for="title" class="col-sm-3 col-form-label">Recipe title<span
-						class="text-secondary"><small><br>Max. 100 characters</span></small></label>
+				<label for="title" class="col-sm-3 col-form-label">Recipe title<span class="text-secondary"></label>
 				<div class="col-sm-9">
-					<input type="text" class="form-control" id="title" placeholder="Recipe title" name="recipe" maxlength="100">
+					<input type="text" class="form-control" id="title" placeholder="Recipe title" name="title" maxlength="100"
+						required="required">
+					<small class="form-text text-muted">
+						Recipe title has a maximum of 100 characters
+					</small>
+					<div class="invalid-feedback">Recipe title already exists in database</div>
 				</div>
 			</div>
+			<!-- Time -->
 			<div class="form-group row">
-				<label for="description" class="col-sm-3 col-form-label">Description<span
-						class="text-secondary"><small><br>Add a short description for your recipe</span></small></label>
+				<label for="time" class="col-sm-3 col-form-label">Cooking time<span class="text-secondary"></label>
 				<div class="col-sm-9">
-					<textarea class="form-control" id="description" rows="3" placeholder="Description" name="description"></textarea>
+					<input type="number" class="form-control" id="title" placeholder="Cooking time" name="title" maxlength="100">
+					<small class="form-text text-muted">
+						Enter the amount of cooking time in minutes (optional)
+					</small>
 				</div>
 			</div>
+			<!-- Description -->
+			<div class="form-group row">
+				<label for="description" class="col-sm-3 col-form-label">Description<span class="text-secondary"></label>
+				<div class="col-sm-9">
+					<textarea class="form-control" id="description" rows="3" placeholder="Description" name="description"
+						required="required"></textarea>
+				</div>
+			</div>
+			<!-- Ingredients -->
 			<div class="form-group row">
 				<label for="ingredients" class="col-sm-3 col-form-label">Ingredients<span
 						class="text-secondary"><small><br>Enter a new line for each new ingredient</span></small></label>
 				<div class="col-sm-9">
-					<textarea class="form-control" id="ingredients" rows="6" placeholder="Ingredients" name="ingredients"></textarea>
+					<div class="input-group">
+						<input class="form-control" id="ingredients" placeholder="Ingredients" name="ingredients"
+							required="required" aria-describedby="ingredientsButton"></input>
+						<div class="input-group-append">
+							<button class="btn btn-outline-secondary" type="button" id="ingredientsButton" onclick="addField()">+</button>
+						</div>
+					</div>
 				</div>
 			</div>
+			<!-- Method -->
 			<div class="form-group row">
-				<label for="method" class="col-sm-3 col-form-label">Method<span class="text-secondary"><small><br>Enter a new line for each new step and do not include numbering</span></small></label>
+				<label for="method" class="col-sm-3 col-form-label">Method<span class="text-secondary"><small><br>Enter a new
+							line for each new step and do not include numbering</span></small></label>
 				<div class="col-sm-9">
-					<textarea class="form-control" id="method" rows="10" placeholder="Method" name="method"></textarea>
+					<textarea class="form-control" id="method" rows="10" placeholder="Method" name="method"
+						required="required"></textarea>
 				</div>
 			</div>
+			<!-- Submit -->
 			<div class="form-group row">
 				<div class="col-sm-10">
 					<button type="submit" class="btn btn-primary" id="submit" onsubmit="return false">Add recipe</button>
@@ -99,7 +123,7 @@
 
 					// POST request to server
 					$.ajax({
-						url: "http://localhost:3000/save",
+						url: "http://localhost:3000/db/save",
 						type: "POST",
 						dataType: "json",
 						data: data,
@@ -107,7 +131,7 @@
 							console.log("POST success");
 						},
 						error: function () {
-							console.log("POST error");
+							$("#title").addClass("is-invalid")
 						}
 					});
 				});

@@ -30,3 +30,16 @@ nav {
 nav li.active {
   font-weight: bold;
 }
+
+/* Cards */
+.card-columns {
+  column-count: 2;
+}
+.card:hover {
+  background-color: #F8F8F8;
+}
+
+/* Form */
+.col-form-label span.subtitle {
+  line-height: 1em;
+}

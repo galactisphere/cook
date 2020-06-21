@@ -1,0 +1,77 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  title The Chef&apos;s Pocket
+  // jQuery
+  script(src='../../node_modules/jquery/dist/jquery.min.js')
+  // popper.js
+  script(src='../../node_modules/popper.js/dist/popper.min.js')
+  // Bootstrap CSS
+  link(rel='stylesheet' href='../../node_modules/bootstrap/dist/css/bootstrap.min.css')
+  // Bootstrap JS
+  script(src='../../node_modules/bootstrap/dist/js/bootstrap.min.js')
+  // json2html
+  script(src='../../node_modules/node-json2html/json2html.js')
+  // handlebars.js
+  script(src='../../node_modules/handlebars/dist/handlebars.min.js')
+  // Main spreadsheet
+  link(rel='stylesheet' href='../css/index.css')
+// Navigation
+nav.navbar.navbar-expand-md.navbar-light.bg-light
+  a.navbar-brand(href='index.html') Pocket
+  button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+    span.navbar-toggler-icon
+  #navbarSupportedContent.collapse.navbar-collapse
+    ul.navbar-nav.mr-auto.nav.nav-pills
+      li.nav-item.active
+        a.nav-link(href='index.html') Home
+      li.nav-item
+        a.nav-link(href='shopping.html') Shopping
+      li.nav-item
+        a.nav-link(href='addRecipe.html') Add recipe
+    form.form-inline.my-2.my-lg-0
+      input.form-control.mr-sm-2(type='search' placeholder='Search' aria-label='Search')
+      button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
+.container.mt-4
+  script#entry(type='text/x-handlebars-template').
+    <div class="card-columns">
+    {{#each recipes}}
+    <div class="card mb-3">
+    <div class="card-body">
+    <a href="{{../path}}/db/{{title}}.html" class="list-group-item-action">
+    <h5 class="card-title"><b>{{title}}</b></h5>
+    <p class="card-text">{{description}}</p>
+    </a>
+    </div>
+    </div>
+    {{/each}}
+    </div>
+script.
+  var data, path
+  $.ajax({
+  "async": false,
+  "type": "GET",
+  "global": "false",
+  "datatype": "json",
+  "url": "http://localhost:3000/db/get",
+  "success": function (e) {
+  data = JSON.stringify(e)
+  }
+  })
+  $.ajax({
+  "async": false,
+  "type": "GET",
+  "global": "false",
+  "datatype": "text",
+  "url": "http://localhost:3000/path",
+  "success": function (e) {
+  path = e
+  }
+  })
+  var source = document.getElementById("entry").innerHTML
+  console.dir(source)
+  var template = Handlebars.compile(source)
+  var parsedData = JSON.parse(data)
+  var updatedData = $.extend(parsedData, { "path": path })
+  var result = template(updatedData)
+  document.getElementById("entry").outerHTML = result

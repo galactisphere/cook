@@ -32,12 +32,21 @@ module.exports.read = function(data) {
   console.log("Added json to db")
 }
 
+// Search id and return contents
+module.exports.search = function(data) {
+  return db.get("recipes")
+           .find({"title": data})
+           .value()
+}
+
 // Delete the entire database
+/*
 module.exports.purge = function(data) {
   db.get("recipes")
     .remove()
     .write()
 }
+*/
 
 /*
 // Set a user using Lodash shorthand syntax

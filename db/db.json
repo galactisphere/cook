@@ -1,35 +1,16 @@
 {
   "recipes": [
-    "{\n\t\"recipe\": \"Recipe test 1\",\n\t\"description\": \"Test 1\",\n\t\"ingredients\": \"Test 1\",\n\t\"method\": \"Test 1\"\n}",
-    "{\n\t\"recipe\": \"Test 1\",\n\t\"description\": \"\",\n\t\"ingredients\": \"\",\n\t\"method\": \"\"\n}",
-    "{\n\t\"recipe\": \"test\",\n\t\"description\": \"\",\n\t\"ingredients\": \"\",\n\t\"method\": \"\"\n}",
-    "{\n\t\"recipe\": \"test\",\n\t\"description\": \"\",\n\t\"ingredients\": \"\",\n\t\"method\": \"\"\n}",
-    "{\n\t\"recipe\": \"test\",\n\t\"description\": \"\",\n\t\"ingredients\": \"\",\n\t\"method\": \"\"\n}",
-    "{\n\t\"recipe\": \"test\",\n\t\"description\": \"\",\n\t\"ingredients\": \"\",\n\t\"method\": \"\"\n}",
-    "{\n\t\"recipe\": \"test\",\n\t\"description\": \"\",\n\t\"ingredients\": \"\",\n\t\"method\": \"\"\n}",
-    "{\n\t\"recipe\": \"\",\n\t\"description\": \"\",\n\t\"ingredients\": \"\",\n\t\"method\": \"\"\n}",
-    "{\n\t\"recipe\": \"\",\n\t\"description\": \"\",\n\t\"ingredients\": \"\",\n\t\"method\": \"\"\n}",
-    "{\n\t\"recipe\": \"\",\n\t\"description\": \"\",\n\t\"ingredients\": \"\",\n\t\"method\": \"\"\n}",
-    "{\n\t\"recipe\": \"\",\n\t\"description\": \"\",\n\t\"ingredients\": \"\",\n\t\"method\": \"\"\n}",
-    "{\"recipe\":\"test\",\"description\":\"\",\"ingredients\":\"\",\"method\":\"\"}",
-    "{\"recipe\":\"\",\"description\":\"\",\"ingredients\":\"\",\"method\":\"\"}",
-    "{\"recipe\":\"test 1\",\"description\":\"\",\"ingredients\":\"\",\"method\":\"\"}",
-    "{\"recipe\":\"test\",\"description\":\"\",\"ingredients\":\"\",\"method\":\"\"}",
-    "{\"recipe\":\"\",\"description\":\"\",\"ingredients\":\"\",\"method\":\"\"}",
-    "{\"recipe\":\"\",\"description\":\"\",\"ingredients\":\"\",\"method\":\"\"}",
-    "{\"recipe\":\"\",\"description\":\"\",\"ingredients\":\"\",\"method\":\"\"}",
-    "{\"recipe\":\"\",\"description\":\"\",\"ingredients\":\"\",\"method\":\"\"}",
-    "{\"recipe\":\"\",\"description\":\"\",\"ingredients\":\"\",\"method\":\"\"}",
-    "{\"recipe\":\"\",\"description\":\"\",\"ingredients\":\"\",\"method\":\"\"}",
-    "{\"recipe\":\"\",\"description\":\"\",\"ingredients\":\"\",\"method\":\"\"}",
-    "{\"recipe\":\"\",\"description\":\"\",\"ingredients\":\"\",\"method\":\"\"}",
-    "{\"recipe\":\"\",\"description\":\"\",\"ingredients\":\"\",\"method\":\"\"}",
-    "{\"recipe\":\"\",\"description\":\"\",\"ingredients\":\"\",\"method\":\"\"}",
-    "{\"recipe\":\"Untitled\",\"description\":\"\",\"ingredients\":\"\",\"method\":\"\"}",
-    "{\"recipe\":\"\",\"description\":\"\",\"ingredients\":\"\",\"method\":\"\"}",
-    "{\"recipe\":\"\",\"description\":\"\",\"ingredients\":\"\",\"method\":\"\"}",
-    "{\"recipe\":\"\",\"description\":\"\",\"ingredients\":\"\",\"method\":\"\"}",
-    "{\"recipe\":\"\",\"description\":\"\",\"ingredients\":\"\",\"method\":\"\"}",
-    "{\"recipe\":\"\",\"description\":\"\",\"ingredients\":\"\",\"method\":\"\"}"
+    {
+      "title": "Spinach and ricotta lasagne in a mug",
+      "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quibusdam voluptas nostrum porro deserunt recusandae quod, explicabo, temporibus repudiandae itaque tenetur voluptate velit quas. Quas, voluptates fugit minus numquam accusamus nemo!",
+      "ingredients": "",
+      "method": ""
+    },
+    {
+      "title": "Test",
+      "description": "test",
+      "ingredients": "test",
+      "method": "test"
+    }
   ]
 }

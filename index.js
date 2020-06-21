@@ -9,6 +9,11 @@ const path = require("path");
 // Enable live reload for all the files in the project directory
 require("electron-reload")(__dirname);
 
+// Export
+module.exports.path = function(path) {
+  return app.getPath(path)
+}
+
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) { // eslint-disable-line global-require
   app.quit();
@@ -30,7 +35,7 @@ const createWindow = () => {
   const server = require("./server/server")
 
   // Add handlebars
-  const handlebars = require("./src/js/handlebars")
+  // const handlebars = require("./src/js/handlebars")
 
   // Define browser window as session
   // const mainSession = mainWindow.webContents.session

@@ -13,8 +13,8 @@
 	<link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
 	<!-- Bootstrap JS -->
 	<script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-	<!-- json2html -->
-	<script src="../../node_modules/node-json2html/json2html.js"></script>
+	<!-- handlebars.js -->
+	<script src="../../node_modules/handlebars/dist/handlebars.min.js"></script>
 
 	<!-- Main spreadsheet -->
 	<link rel="stylesheet" href="../css/index.css">
@@ -50,78 +50,81 @@
 			</div>
 		</nav>
 		<div class="container mt-3">
-			<!-- Jumbotron -->
-			<div class="jumbotron">
-				<!-- Title -->
-				<h2 class="title mx-auto col-10" style="text-align: center;">Spinach and ricotta lasagne in a mug</h2>
-				<!-- Recipe details -->
-				<div class="d-flex mt-3">
-					<ul class="list-inline text-align-center mx-auto">
-						<li class="list-inline-item time" data-toggle="tooltip" title="Time">
-							<img class="align-center" src="../../node_modules/bootstrap-icons/icons/clock.svg" width="16" height="16">
-							<span class="ml-1 align-text-top">45 min</span>
-						</li>
-						<li class="list-inline-item date" data-toggle="tooltip" title="Time">
-							<img class="align-center" src="../../node_modules/bootstrap-icons/icons/calendar.svg" width="16"
-								height="16">
-							<span class="ml-1 align-text-top">18 June</span>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<!-- Recipe body -->
-			<div class="container">
-				<div class="row">
-					<div class="ingredients col-4">
-						<ul>
-							<li>4 fresh lasagne pasta sheets</li>
-							<li>280g pkt baby spinach
-							<li>medium zucchini, coarsely grated</li>
-							<li>500g fresh firm ricotta</li>
-							<li>2 tbs chopped fresh dill, plus extra, to serve</li>
-							<li>1/2 teaspoon freshly grated nutmeg</li>
-							<li>1 lemon, rind finely grated</li>
-							<li>1 tablespoon fresh lemon juice</li>
-							<li>1 egg, lightly whisked</li>
-							<li>40g (1/2 cup) grated parmesan</li>
-							<li>500g bottle passata</li>
-							<li>300g (3 cups) coarsely grated mozzarella</li>
+			<script id="entry" type="text/x-handlebars-template">
+				<!-- Jumbotron -->
+				<div class="jumbotron">
+					<!-- Title -->
+					<h2 class="title mx-auto col-10" style="text-align: center;">{{title}}</h2>
+					<!-- Recipe details -->
+					<div class="d-flex mt-3">
+						<ul class="list-inline text-align-center mx-auto">
+							<li class="list-inline-item time" data-toggle="tooltip" title="Time">
+								<img class="align-center" src="../../node_modules/bootstrap-icons/icons/clock.svg" width="16"
+									height="16">
+								<span class="ml-1 align-text-top">45 min</span>
+							</li>
+							<li class="list-inline-item date" data-toggle="tooltip" title="Time">
+								<img class="align-center" src="../../node_modules/bootstrap-icons/icons/calendar.svg" width="16"
+									height="16">
+								<span class="ml-1 align-text-top">18 June</span>
+							</li>
 						</ul>
 					</div>
-					<div class="method col-8">
-						<ol>
-							<li>Cut each pasta sheet into 6. Place in a shallow heatproof dish. Cover with boiling water. Set aside
-								for
-								5
-								minutes to soften then drain.</li>
-							<li>Place spinach in a large heatproof bowl. Cover with boiling water. Set aside for 1 minute to wilt
-								then
-								drain. Rinse under cold running water. Squeeze out excess water. Coarsely chop. Squeeze liquid from
-								zucchini.</li>
-							<li>Combine the spinach, zucchini, ricotta, dill, nutmeg, lemon rind, juice, egg and 1⁄3 cup parmesan in
-								a
-								large bowl. Season.</li>
-							<li>Lightly spray six 400ml microwave- safe mugs with oil. Place 1 tbs passata in each mug then a pasta
-								square
-								and 2 tablespoonfuls of ricotta mixture, spreading to cover. Top with 1 heaped tbs mozzarella and 1
-								tbs
-								remaining passata. Repeat layering twice more. Top with the remaining pasta then remaining parmesan
-								and
-								mozzarella.</li>
-							<li>Microwave 3 mugs, loosely covered with plastic wrap, on High for 2 minutes. Uncover. Microwave on
-								High
-								for
-								a further 1 minute or until cheese is bubbling. Set aside for 1 minute to cool slightly. Repeat with
-								remaining mugs. Season and top with extra dill, if using.</li>
-						</ol>
+				</div>
+				<!-- Recipe body -->
+				<div class="container">
+					<div class="row">
+						<div class="ingredients col-4">
+							<ul>
+								<li>{{ingredients}}</li>
+							</ul>
+						</div>
+						<div class="method col-8">
+							<ol>
+								<li>{{method}}</li>
+							</ol>
+						</div>
 					</div>
 				</div>
-			</div>
-
-
+			</script>
 		</div>
 	</div>
-	</div>
+
+	<script>
+		// POST request to server
+
+		var url = window.location.href
+		var id = url.substring(url.lastIndexOf("?") + 1)
+
+		var data
+
+		$.ajax({
+			async: false,
+			url: "http://localhost:3000/content",
+			type: "POST",
+			dataType: "text",
+			data: id,
+			success: function (e) {
+				console.log("POST success");
+				data = e
+			},
+			error: function () {
+				console.log("POST error")
+			}
+		})
+
+		console.dir(data)
+		var source = document.getElementById("entry").innerHTML
+
+		var template = Handlebars.compile(source)
+		console.dir(template)
+		var parsedData = JSON.parse(data)
+
+		var result = template(parsedData)
+
+		document.getElementById("entry").outerHTML = result
+	</script>
 </body>
+
 
 </html>
