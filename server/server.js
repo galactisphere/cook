@@ -1,27 +1,28 @@
 // Define defaults
 const express = require('express'),
-    	app     = express(),
-   		port    = parseInt(process.env.PORT, 10) || 3000;
+  app = express(),
+  port = parseInt(process.env.PORT, 10) || 3000;
 
-const db = require("./models/db")
+const db = require(__dirname + "/./models/db")
 const bodyParser = require("body-parser")
 const fse = require('fs-extra')
-const electron = require("../index");
-const Lowdb = require('lowdb');
+const electron = require(__dirname + "/../src/index.js");
 
 //var remote = require("electron").remote
 
 app.use(bodyParser.json({}))
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.urlencoded({
+  extended: false
+}))
 
 //const documentsDir = remote.getPath("home")
 
 // POST save
-app.post("/db/save", function(req, res) {
+app.post("/db/save", function (req, res) {
 
   console.log(req.body)
   var data = JSON.stringify(req.body)
-	var parsedData = JSON.parse(data)
+  var parsedData = JSON.parse(data)
 
   var filename = electron.path("documents") + "/The Chef's Pocket/" + parsedData.title + ".json"
 
@@ -44,30 +45,39 @@ app.post("/db/save", function(req, res) {
 })
 
 // POST content
-app.post("/content", function(req, res){
+app.post("/content", function (req, res) {
   var data = req.body
-  console.log(data.id)
-  console.log(db.search(data.id))
   res.send(db.search(data.id))
 })
 
 // POST delete
-app.post("/delete", function(req, res){
+app.post("/delete", function (req, res) {
+  var data = req.body
 
+  //console.log(data.id)
+
+  var filename = electron.path("documents") + "/The Chef's Pocket/" + data.id + ".json"
+
+  //console.log(db.search(data.id))
+
+  db.delete(data.id)
+  fse.removeSync(filename)
+
+  res.send("Delete success")
 })
 
 // GET db
-app.get("/db/get", function(req, res){
+app.get("/db/get", function (req, res) {
   res.send(fse.readJSONSync(__dirname + "/../db/db.json"))
 })
 
 // GET path
-app.get("/path", function(req, res){
+app.get("/path", function (req, res) {
   res.send(electron.path("userData"))
 })
 
 
 
-app.listen(port, function() {
+app.listen(port, function () {
   console.log("Server is running on port 3000");
 });

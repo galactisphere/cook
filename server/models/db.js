@@ -13,16 +13,6 @@ db.defaults({
 })
   .write()
 
-module.exports.add = function(data) {
-  /*
-  db.get('recipes')
-    .push(data)
-    .write()
-  */
-  db.set("", "you")
-    .write()
-  console.log(" you")
-}
 
 // Read json and add to database
 module.exports.read = function(data) {
@@ -39,14 +29,12 @@ module.exports.search = function(data) {
            .value()
 }
 
-// Delete the entire database
-/*
-module.exports.purge = function(data) {
+// Delete entry
+module.exports.delete = function(data) {
   db.get("recipes")
-    .remove()
+    .remove({"title": data})
     .write()
 }
-*/
 
 /*
 // Set a user using Lodash shorthand syntax

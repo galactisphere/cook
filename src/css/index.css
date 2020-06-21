@@ -26,6 +26,7 @@ body::-webkit-scrollbar {
 /* Navigation */
 nav {
   font-family: Font1;
+  background-color: #2c666e;
 }
 nav li.active {
   font-weight: bold;

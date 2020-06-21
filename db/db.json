@@ -1,16 +1,3 @@
 {
-  "recipes": [
-    {
-      "title": "Spinach and ricotta lasagne in a mug",
-      "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quibusdam voluptas nostrum porro deserunt recusandae quod, explicabo, temporibus repudiandae itaque tenetur voluptate velit quas. Quas, voluptates fugit minus numquam accusamus nemo!",
-      "ingredients": "",
-      "method": ""
-    },
-    {
-      "title": "Test",
-      "description": "test",
-      "ingredients": "test",
-      "method": "test"
-    }
-  ]
+  "recipes": []
 }

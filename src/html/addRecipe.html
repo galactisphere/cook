@@ -19,10 +19,26 @@
 </head>
 
 <body>
+	<script>
+		function addIngredientField() {
+			var html = ""
+			html +=
+				`<div class="input-group mt-2"><input class="form-control" id="ingredients" placeholder="Ingredient" name="ingredients" required="required" aria-describedby="ingredientsButton"></input><div class="input-group-append"><button class="btn btn-outline-secondary" type="button" id="ingredientsButton" onclick="addIngredientField()">+</button></div></div>`
+			$("#ingredientFields").append(html)
+		}
+	</script>
+
+	<script>
+		function addMethodField() {
+			var html = ""
+			html += `<div class="input-group"><input class="form-control" id="method" placeholder="Step" name="method" required="required" aria-describedby="methodButton"></input><div class="input-group-append"><button class="btn btn-outline-secondary" type="button" id="methodButton" onclick="addMethodField()">+</button></div></div>`
+			$("#methodFields").append(html)
+		}
+	</script>
 
 	<!-- Navigation -->
-	<nav class="navbar navbar-expand-md navbar-light bg-light">
-		<a class="navbar-brand" href="index.html">Pocket</a>
+	<nav class="navbar navbar-expand-md navbar-dark">
+		<a class="navbar-brand" href="index.html">The Chef's Pocket</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -37,10 +53,6 @@
 					<a class="nav-link" href="addRecipe.html">Add recipe</a>
 				</li>
 			</ul>
-			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-			</form>
 		</div>
 	</nav>
 
@@ -64,7 +76,7 @@
 			<div class="form-group row">
 				<label for="time" class="col-sm-3 col-form-label">Cooking time<span class="text-secondary"></label>
 				<div class="col-sm-9">
-					<input type="number" class="form-control" id="title" placeholder="Cooking time" name="title" maxlength="100">
+					<input type="number" class="form-control" id="time" placeholder="Cooking time" name="time" maxlength="100">
 					<small class="form-text text-muted">
 						Enter the amount of cooking time in minutes (optional)
 					</small>
@@ -80,25 +92,30 @@
 			</div>
 			<!-- Ingredients -->
 			<div class="form-group row">
-				<label for="ingredients" class="col-sm-3 col-form-label">Ingredients<span
-						class="text-secondary"><small><br>Enter a new line for each new ingredient</span></small></label>
-				<div class="col-sm-9">
+				<label for="ingredients" class="col-sm-3 col-form-label">Ingredients<span class="text-secondary"></label>
+				<div id="ingredientFields" class="col-sm-9">
 					<div class="input-group">
-						<input class="form-control" id="ingredients" placeholder="Ingredients" name="ingredients"
-							required="required" aria-describedby="ingredientsButton"></input>
+						<input class="form-control" id="ingredients" placeholder="Ingredient" name="ingredients" required="required"
+							aria-describedby="ingredientsButton"></input>
 						<div class="input-group-append">
-							<button class="btn btn-outline-secondary" type="button" id="ingredientsButton" onclick="addField()">+</button>
+							<button class="btn btn-outline-secondary" type="button" id="ingredientsButton"
+								onclick="addIngredientField()">+</button>
 						</div>
 					</div>
 				</div>
 			</div>
 			<!-- Method -->
 			<div class="form-group row">
-				<label for="method" class="col-sm-3 col-form-label">Method<span class="text-secondary"><small><br>Enter a new
-							line for each new step and do not include numbering</span></small></label>
-				<div class="col-sm-9">
-					<textarea class="form-control" id="method" rows="10" placeholder="Method" name="method"
-						required="required"></textarea>
+				<label for="method" class="col-sm-3 col-form-label">Method<span class="text-secondary"></label>
+				<div id="methodFields" class="col-sm-9">
+					<div class="input-group">
+						<input class="form-control" id="method" placeholder="Step" name="method" required="required"
+							aria-describedby="methodButton"></input>
+						<div class="input-group-append">
+							<button class="btn btn-outline-secondary" type="button" id="methodButton"
+								onclick="addMethodField()">+</button>
+						</div>
+					</div>
 				</div>
 			</div>
 			<!-- Submit -->

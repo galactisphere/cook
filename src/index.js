@@ -24,7 +24,7 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 1100,
     height: 600,
-    titleBarStyle: "hiddenInset",
+    // titleBarStyle: "hiddenInset",
     // frame: false,
     autoHideMenuBar: true,
     minWidth: 500,
@@ -32,7 +32,7 @@ const createWindow = () => {
   });
 
   // Run node js server
-  const server = require("./server/server")
+  const server = require(__dirname + "/../server/server")
 
   // Add handlebars
   // const handlebars = require("./src/js/handlebars")
@@ -41,7 +41,7 @@ const createWindow = () => {
   // const mainSession = mainWindow.webContents.session
 
   // Load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, "src/html/index.html"));
+  mainWindow.loadFile(path.join(__dirname, "html/index.html"));
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
