@@ -1,11 +1,21 @@
-const { app, BrowserWindow } = require('electron');
-const path = require('path');
+// Index -- initial to run when app launches
+
+const {
+  app,
+  BrowserWindow
+} = require("electron");
+const path = require("path");
 
 // Enable live reload for all the files in the project directory
-require('electron-reload')(__dirname);
+// require("electron-reload")(__dirname);
+
+// Export
+module.exports.path = function(path) {
+  return app.getPath(path)
+}
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
+if (require("electron-squirrel-startup")) { // eslint-disable-line global-require
   app.quit();
 }
 
@@ -14,10 +24,24 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
+    // titleBarStyle: "hiddenInset",
+    // frame: false,
+    autoHideMenuBar: true,
+    minWidth: 500,
+    minHeight: 600
   });
 
-  // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, 'index.html'));
+  // Run node js server
+  const server = require(__dirname + "/../server/server")
+
+  // Add handlebars
+  // const handlebars = require("./src/js/handlebars")
+
+  // Define browser window as session
+  // const mainSession = mainWindow.webContents.session
+
+  // Load the index.html of the app.
+  mainWindow.loadFile(path.join(__dirname, "html/index.html"));
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();
@@ -26,24 +50,39 @@ const createWindow = () => {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow);
+app.on("ready", createWindow);
 
 // Quit when all windows are closed.
-app.on('window-all-closed', () => {
+app.on("window-all-closed", () => {
   // On OS X it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform !== 'darwin') {
+  if (process.platform !== "darwin") {
     app.quit();
   }
 });
 
-app.on('activate', () => {
-  // On OS X it's common to re-create a window in the app when the
+app.on("activate", () => {
+  // On OS X it"s common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
   }
 });
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and import them here.
+// In this file you can include the rest of your app"s specific main process code. You can also put them in separate files and import them here.
+
+/*
+expressApp.post('saveFile', function(req, res) {
+  fs.writeFile("data.txt", req.body.data, function(err) {
+      if(err) {
+          return console.log(err);
+      }
+
+      console.log("The file was saved!");
+      res.end("This message will be sent back to the client!");
+  }); 
+});
+*/
+
+// Print user path to console
+console.log(app.getPath('userData'));

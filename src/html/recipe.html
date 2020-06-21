@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>The Chef's Pocket</title>
+
+	<!-- jQuery -->
+	<script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+	<!-- popper.js -->
+	<script src="../../node_modules/popper.js/dist/popper.min.js"></script>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<!-- Bootstrap JS -->
+	<script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	<!-- handlebars.js -->
+	<script src="../../node_modules/handlebars/dist/handlebars.min.js"></script>
+
+	<!-- Main spreadsheet -->
+	<link rel="stylesheet" href="../css/index.css">
+</head>
+
+<body>
+	<script type="text/javascript">
+		var url = window.location.href
+		var id = url.substring(url.lastIndexOf("?") + 1)
+
+		function deleteRecipe() {
+			$.ajax({
+				async: false,
+				url: "http://localhost:3000/delete",
+				type: "POST",
+				dataType: "text",
+				data: id,
+				success: function (e) {
+					console.log("POST success");
+					window.location.replace("index.html")
+				},
+				error: function () {
+					console.log("POST error");
+				}
+			})
+		}
+	</script>
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-md navbar-dark">
+		<a class="navbar-brand" href="index.html">The Chef's Pocket</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="container-fluid backdrop">
+			<div class="collapse navrbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto nav nav-pills">
+					<li class="nav-item active">
+						<a class="nav-link" href="index.html">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="addRecipe.html">Add recipe</a>
+					</li>
+				</ul>
+			</div>
+	</nav>
+	<div class="container mt-5">
+		<script id="entry" type="text/x-handlebars-template">
+			<!-- Jumbotron -->
+			<div class="jumbotron">
+				<!-- Title -->
+				<h2 class="title mx-auto col-10" style="text-align: center;">{{title}}</h2>
+				<!-- Recipe details -->
+				{{#if time}}
+				<div class="d-flex mt-3">
+					<ul class="list-inline text-align-center mx-auto">
+						<li class="list-inline-item time" data-toggle="tooltip" title="Time">
+							<img class="align-center" src="../../node_modules/bootstrap-icons/icons/clock.svg" width="16" height="16">
+							<span class="ml-1 align-text-top">{{time}} min</span>
+						</li>
+					</ul>
+				</div>
+				{{/if}}
+			</div>
+			<!-- Recipe body -->
+			<div class="container">
+				<div class="row">
+					<div class="ingredients col-4">
+						<h5 class="mb-3">Ingredients</h5>
+						<ul>
+							{{#each ingredients}}
+							<li>{{this}}</li>
+							{{/each}}
+						</ul>
+					</div>
+					<div class="method col-8">
+						<h5 class="mb-3">Method</h5>
+						<ol>
+						{{#each method}}
+							<li>{{this}}</li>
+						{{/each}}
+						</ol>
+					</div>
+				</div>
+				<!-- Delete -->
+				<div class="delete mt-5">
+					<button onclick="deleteRecipe()" type="button" class="btn btn-danger"><svg class="bi bi-trash align-center"
+							width="15" height="15" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+							<path
+								d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+							<path fill-rule="evenodd"
+								d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+						</svg><span class="ml-1 align-text-top">Delete</span></button>
+				</div>
+			</div>
+		</script>
+	</div>
+	</div>
+
+	<script>
+		// POST request to server
+
+		var url = window.location.href
+		var id = url.substring(url.lastIndexOf("?") + 1)
+
+		var data
+
+		$.ajax({
+			async: false,
+			url: "http://localhost:3000/content",
+			type: "POST",
+			dataType: "text",
+			data: id,
+			success: function (e) {
+				console.log("POST success");
+				data = e
+			},
+			error: function () {
+				console.log("POST error")
+			}
+		})
+
+		console.dir(data)
+		var source = document.getElementById("entry").innerHTML
+
+		var template = Handlebars.compile(source)
+		console.dir(template)
+		var parsedData = JSON.parse(data)
+
+		var result = template(parsedData)
+
+		document.getElementById("entry").outerHTML = result
+	</script>
+</body>
+
+
+</html>

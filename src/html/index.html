@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>The Chef's Pocket</title>
+
+	<!-- jQuery -->
+	<script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+	<!-- popper.js -->
+	<script src="../../node_modules/popper.js/dist/popper.min.js"></script>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<!-- Bootstrap JS -->
+	<script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	<!-- json2html -->
+	<script src="../../node_modules/node-json2html/json2html.js"></script>
+	<!-- handlebars.js -->
+	<script src="../../node_modules/handlebars/dist/handlebars.min.js"></script>
+
+	<!-- Main spreadsheet -->
+	<link rel="stylesheet" href="../css/index.css">
+</head>
+
+<body>
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-md navbar-dark">
+		<a class="navbar-brand" href="index.html">The Chef's Pocket</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto nav nav-pills">
+				<li class="nav-item active">
+					<a class="nav-link" href="index.html">Home</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="addRecipe.html">Add recipe</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="container mt-5">
+		<script id="entry" type="text/x-handlebars-template">
+			
+			<div class="card-columns">
+				{{#each recipes}}
+				<div class="card mb-3">
+					<div class="card-body">
+						<a href="../html/recipe.html?id={{title}}" class="list-group-item-action">
+							<h5 class="card-title"><b>{{title}}</b></h5>
+							<p class="card-text">{{description}}</p>
+						</a>
+					</div>
+				</div>
+				{{/each}}
+			</div>
+				
+			
+	</script>
+	</div>
+
+	<script>
+
+		var data, path
+
+		$.ajax({
+			"async": false,
+			"type": "GET",
+			"global": "false",
+			"datatype": "json",
+			"url": "http://localhost:3000/db/get",
+			"success": function (e) {
+				data = JSON.stringify(e)
+			}
+		})
+
+		$.ajax({
+			"async": false,
+			"type": "GET",
+			"global": "false",
+			"datatype": "text",
+			"url": "http://localhost:3000/path",
+			"success": function (e) {
+				path = e
+			}
+		})
+
+		var source = document.getElementById("entry").innerHTML
+		console.dir(source)
+
+		var template = Handlebars.compile(source)
+		var parsedData = JSON.parse(data)
+		var updatedData = $.extend(parsedData, { "path": path })
+
+		var result = template(updatedData)
+
+		document.getElementById("entry").outerHTML = result
+	</script>
+
+</body>
+
+</html>

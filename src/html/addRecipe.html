@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>The Chef's Pocket</title>
+
+	<!-- jQuery -->
+	<script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+	<!-- popper.js -->
+	<script src="../../node_modules/popper.js/dist/popper.min.js"></script>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<!-- Bootstrap JS -->
+	<script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+	<!-- Main spreadsheet -->
+	<link rel="stylesheet" href="../css/index.css">
+</head>
+
+<body>
+	<script>
+		function addIngredientField() {
+			var html = ""
+			html +=
+				`<div class="input-group mt-2"><input class="form-control" id="ingredients" placeholder="Ingredient" name="ingredients" required="required" aria-describedby="ingredientsButton"></input><div class="input-group-append"><button class="btn btn-outline-secondary" type="button" id="ingredientsButton" onclick="addIngredientField()">+</button></div></div>`
+			$("#ingredientFields").append(html)
+		}
+	</script>
+
+	<script>
+		function addMethodField() {
+			var html = ""
+			html +=
+				`<div class="input-group"><input class="form-control" id="method" placeholder="Step" name="method" required="required" aria-describedby="methodButton"></input><div class="input-group-append"><button class="btn btn-outline-secondary" type="button" id="methodButton" onclick="addMethodField()">+</button></div></div>`
+			$("#methodFields").append(html)
+		}
+	</script>
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-md navbar-dark">
+		<a class="navbar-brand" href="index.html">The Chef's Pocket</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="index.html">Home <span class="sr-only"></a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="addRecipe.html">Add recipe</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+	<!-- Main content -->
+	<div class="container mt-4">
+
+		<div class="alert alert-primary">
+			All entries are also saved inside the Documents directory of your computer, allowing you to import them into any
+			other application, if you wish.
+		</div>
+
+		<!-- Form -->
+		<form action="/save" method="POST" id="form">
+			<!-- Title -->
+			<div class="form-group row">
+				<label for="title" class="col-sm-3 col-form-label">Recipe title<span class="text-secondary"></label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" id="title" placeholder="Recipe title" name="title" maxlength="100"
+						required="required">
+					<small class="form-text text-muted">
+						Recipe title has a maximum of 100 characters
+					</small>
+					<div class="invalid-feedback">Recipe title already exists in database</div>
+				</div>
+			</div>
+			<!-- Time -->
+			<div class="form-group row">
+				<label for="time" class="col-sm-3 col-form-label">Cooking time<span class="text-secondary"></label>
+				<div class="col-sm-9">
+					<input type="number" class="form-control" id="time" placeholder="Cooking time" name="time" maxlength="100">
+					<small class="form-text text-muted">
+						Enter the amount of cooking time in minutes (optional)
+					</small>
+				</div>
+			</div>
+			<!-- Description -->
+			<div class="form-group row">
+				<label for="description" class="col-sm-3 col-form-label">Description<span class="text-secondary"></label>
+				<div class="col-sm-9">
+					<textarea class="form-control" id="description" rows="3" placeholder="Description" name="description"
+						required="required"></textarea>
+				</div>
+			</div>
+			<!-- Ingredients -->
+			<div class="form-group row">
+				<label for="ingredients" class="col-sm-3 col-form-label">Ingredients<span class="text-secondary"></label>
+				<div id="ingredientFields" class="col-sm-9">
+					<div class="input-group">
+						<input class="form-control" id="ingredients" placeholder="Ingredient" name="ingredients" required="required"
+							aria-describedby="ingredientsButton"></input>
+						<div class="input-group-append">
+							<button class="btn btn-outline-secondary" type="button" id="ingredientsButton"
+								onclick="addIngredientField()">+</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Method -->
+			<div class="form-group row">
+				<label for="method" class="col-sm-3 col-form-label">Method<span class="text-secondary"></label>
+				<div id="methodFields" class="col-sm-9">
+					<div class="input-group">
+						<input class="form-control" id="method" placeholder="Step" name="method" required="required"
+							aria-describedby="methodButton"></input>
+						<div class="input-group-append">
+							<button class="btn btn-outline-secondary" type="button" id="methodButton"
+								onclick="addMethodField()">+</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Submit -->
+			<div class="form-group row">
+				<div class="col-sm-10">
+					<button type="submit" class="btn btn-primary" id="submit" onsubmit="return false">Add recipe</button>
+				</div>
+			</div>
+		</form>
+
+		<script>
+			// Submit html form to express.js server
+			$(document).ready(function () {
+				var data;
+				$("#form").submit(function (event) {
+
+					// Prevent webpage reload
+					// event.preventDefault();
+
+					data = $(this).serializeArray();
+					console.log(data);
+
+					// POST request to server
+					$.ajax({
+						url: "http://localhost:3000/db/save",
+						type: "POST",
+						dataType: "json",
+						data: data,
+						success: function () {
+							console.log("POST success");
+							window.location.replace("index.html")
+						},
+						error: function () {
+							$("#title").addClass("is-invalid")
+						}
+					});
+				});
+			});
+		</script>
+	</div>
+</body>
+
+</html>
