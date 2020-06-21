@@ -42,6 +42,10 @@ app.post("/db/save", function (req, res) {
     fse.outputJSONSync(filename, parsedData)
     console.log("Added " + filename)
   }
+
+  res.status(200).send({
+    message: "Successfully saved form data"
+  })
 })
 
 // POST content

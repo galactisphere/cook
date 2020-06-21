@@ -1,6 +1,6 @@
 {
   "name": "the-chefs-pocket",
-  "productName": "The Chef's Pocket",
+  "productName": "the-chefs-pocket",
   "version": "0.1.0",
   "description": "A handy pocket cookbook for the amateur to the professional chef",
   "main": "src/index.js",

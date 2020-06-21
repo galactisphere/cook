@@ -14,9 +14,12 @@ body {
                Arial,
                sans-serif;
   margin: auto;
-  max-width: 50rem;
   /*padding: 1rem;*/
   font-size: 1rem;
+}
+
+.container {
+  max-width: 45rem;
 }
 
 body::-webkit-scrollbar {

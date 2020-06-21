@@ -31,7 +31,8 @@
 	<script>
 		function addMethodField() {
 			var html = ""
-			html += `<div class="input-group"><input class="form-control" id="method" placeholder="Step" name="method" required="required" aria-describedby="methodButton"></input><div class="input-group-append"><button class="btn btn-outline-secondary" type="button" id="methodButton" onclick="addMethodField()">+</button></div></div>`
+			html +=
+				`<div class="input-group"><input class="form-control" id="method" placeholder="Step" name="method" required="required" aria-describedby="methodButton"></input><div class="input-group-append"><button class="btn btn-outline-secondary" type="button" id="methodButton" onclick="addMethodField()">+</button></div></div>`
 			$("#methodFields").append(html)
 		}
 	</script>
@@ -58,6 +59,12 @@
 
 	<!-- Main content -->
 	<div class="container mt-4">
+
+		<div class="alert alert-primary">
+			All entries are also saved inside the Documents directory of your computer, allowing you to import them into any
+			other application, if you wish.
+		</div>
+
 		<!-- Form -->
 		<form action="/save" method="POST" id="form">
 			<!-- Title -->
@@ -133,7 +140,7 @@
 				$("#form").submit(function (event) {
 
 					// Prevent webpage reload
-					event.preventDefault();
+					// event.preventDefault();
 
 					data = $(this).serializeArray();
 					console.log(data);
@@ -146,6 +153,7 @@
 						data: data,
 						success: function () {
 							console.log("POST success");
+							window.location.replace("index.html")
 						},
 						error: function () {
 							$("#title").addClass("is-invalid")
