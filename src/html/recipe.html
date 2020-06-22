@@ -86,28 +86,28 @@
 				<div class="row">
 					<div class="ingredients col-4">
 						<h5 class="mb-3">Ingredients</h5>
-						<ul>
+						<table class="table-borderless">
 							{{#each ingredients}}
-								<li>
-									<input class="styled-checkbox" type="checkbox" value="value1">
-									<label class="ml-2">{{this}}</label>
-								</li>
-								{{else}}
-								<li>
-									<input class="styled-checkbox" type="checkbox" value="value1">
-									<label class="ml-2">{{ingredients}}</label>
-								</li>
+							<tr>
+								<td><input class="styled-checkbox" type="checkbox" value="value1"></td>
+								<td class="pl-2">{{this}}</td>
+							</tr>
+							{{else}}
+							<tr>
+								<td><input class="styled-checkbox" type="checkbox" value="value1"></td>
+								<td class="pl-2">{{ingredients}}</td>
+							</tr>
 							{{/each}}
-						</ul>
+						</table>
 					</div>
 					<div class="method col-8">
 						<h5 class="mb-3">Method</h5>
 						<ol>
-						{{#each method}}
+							{{#each method}}
 							<li>{{this}}</li>
 							{{else}}
 							<li>{{method}}</li>
-						{{/each}}
+							{{/each}}
 						</ol>
 					</div>
 				</div>

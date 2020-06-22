@@ -80,10 +80,8 @@ nav li.active {
 
 /* Ingredient lists */
 
-.ingredients ul {
-  list-style: none;
+.ingredients td {
   line-height: 1.2rem;
-  padding: 0;
 }
 
 /* Introduction */
