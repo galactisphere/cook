@@ -1,26 +1,4 @@
 {
   "recipes": [
-    {
-      "title": "Test",
-      "time": "45",
-      "description": "Test",
-      "ingredients": "The quick brown fox jumped over the lazy dog",
-      "method": "The quick brown fox jumped over the lazy dog"
-    },
-    {
-      "title": "Test2",
-      "time": "45",
-      "description": "Test",
-      "ingredients": [
-        "Test the quick brown fox jumped over the lazy dog the quick brown",
-        "Assign responsive-friendly margin or padding",
-        "Assign responsive-friendly margin or padding"
-      ],
-      "method": [
-        "Assign responsive-friendly margin or padding",
-        "Assign responsive-friendly margin or padding",
-        "Assign responsive-friendly margin or padding"
-      ]
-    }
   ]
 }
