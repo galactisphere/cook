@@ -49,17 +49,17 @@
 			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<div class="container-fluid backdrop">
-			<div class="collapse navrbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav mr-auto nav nav-pills">
-					<li class="nav-item active">
-						<a class="nav-link" href="index.html">Home</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="addRecipe.html">Add recipe</a>
-					</li>
-				</ul>
-			</div>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto nav nav-pills">
+				<li class="nav-item">
+					<a class="nav-link" href="index.html">Home</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="addRecipe.html">Add recipe</a>
+				</li>
+			</ul>
+		</div>
 	</nav>
 	<div class="container mt-5">
 		<script id="entry" type="text/x-handlebars-template">
@@ -78,6 +78,8 @@
 					</ul>
 				</div>
 				{{/if}}
+				<!-- Description -->
+				<p class="mx-auto col-8 mt-2 text-center text-secondary">{{description}}</p>
 			</div>
 			<!-- Recipe body -->
 			<div class="container">
@@ -86,7 +88,15 @@
 						<h5 class="mb-3">Ingredients</h5>
 						<ul>
 							{{#each ingredients}}
-							<li>{{this}}</li>
+								<li>
+									<input class="styled-checkbox" type="checkbox" value="value1">
+									<label class="ml-2">{{this}}</label>
+								</li>
+								{{else}}
+								<li>
+									<input class="styled-checkbox" type="checkbox" value="value1">
+									<label class="ml-2">{{ingredients}}</label>
+								</li>
 							{{/each}}
 						</ul>
 					</div>
@@ -95,12 +105,14 @@
 						<ol>
 						{{#each method}}
 							<li>{{this}}</li>
+							{{else}}
+							<li>{{method}}</li>
 						{{/each}}
 						</ol>
 					</div>
 				</div>
 				<!-- Delete -->
-				<div class="delete mt-5">
+				<div class="delete mt-5 mb-5">
 					<button onclick="deleteRecipe()" type="button" class="btn btn-danger"><svg class="bi bi-trash align-center"
 							width="15" height="15" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 							<path

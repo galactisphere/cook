@@ -44,21 +44,36 @@
 		</div>
 	</nav>
 
-	<div class="container mt-5">
+	<div class="container mt-4">
 		<script id="entry" type="text/x-handlebars-template">
-			
+			{{#if recipes.length}}
 			<div class="card-columns">
-				{{#each recipes}}
-				<div class="card mb-3">
-					<div class="card-body">
-						<a href="../html/recipe.html?id={{title}}" class="list-group-item-action">
-							<h5 class="card-title"><b>{{title}}</b></h5>
-							<p class="card-text">{{description}}</p>
-						</a>
+					{{#each recipes}}
+					<div class="card mb-3">
+						<div class="card-body">
+							<a href="../html/recipe.html?id={{title}}" class="list-group-item-action">
+								<h5 class="card-title"><b>{{title}}</b></h5>
+								<p class="card-text">{{description}}</p>
+							</a>
+						</div>
+					</div>
+					{{/each}}
+			</div>
+			{{else}}
+				<div class="intro container">
+					<div class="jumbotron col-sm-9 align-middle mx-auto">
+						<h2 class="title">Welcome to <b>The Chef's Pocket</b>!</h2>
+						<h5 class="mt-4"><b>The Chef's Pocket</b> is a digital application designed from the amateur to the professional chef to help organise and record recipes in their own virtual cookbook.</h5>
+						<ul class="mt-4">
+							<li>Record information using the <b>Add recipe</b> page accessable in the navigation bar.</li>
+							<li>Access the entries generated in the <b>Home</b> page.</li>
+							<li>Each entry directs to an individual <b>recipe</b> page, listing recipe information such as ingredients and method. Entries can also be deleted on this page.</li>
+							<li>All entries are recorded in a JSON format in your Documents directory, allowing for the import of entries into other applications.</li>
+						</ul>
+						<h5 class="mt-4">Get started by adding a recipe via the <b>Add recipe</b> page.</h5>
 					</div>
 				</div>
-				{{/each}}
-			</div>
+			{{/if}}
 				
 			
 	</script>
