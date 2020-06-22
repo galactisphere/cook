@@ -20,21 +20,7 @@
 
 <body>
 	<script>
-		function addIngredientField() {
-			var html = ""
-			html +=
-				`<div class="input-group mt-2"><input class="form-control" id="ingredients" placeholder="Ingredient" name="ingredients" required="required" aria-describedby="ingredientsButton"></input><div class="input-group-append"><button class="btn btn-outline-secondary" type="button" id="ingredientsButton" onclick="addIngredientField()">+</button></div></div>`
-			$("#ingredientFields").append(html)
-		}
-	</script>
 
-	<script>
-		function addMethodField() {
-			var html = ""
-			html +=
-				`<div class="input-group"><input class="form-control" id="method" placeholder="Step" name="method" required="required" aria-describedby="methodButton"></input><div class="input-group-append"><button class="btn btn-outline-secondary" type="button" id="methodButton" onclick="addMethodField()">+</button></div></div>`
-			$("#methodFields").append(html)
-		}
 	</script>
 
 	<!-- Navigation -->
@@ -58,13 +44,7 @@
 	</nav>
 
 	<!-- Main content -->
-	<div class="container mt-4">
-
-		<div class="alert alert-primary">
-			All entries are also saved inside the Documents directory of your computer, allowing you to import them into any
-			other application, if you wish.
-		</div>
-
+	<div class="container mt-4 col-md-9">
 		<!-- Form -->
 		<form action="/save" method="POST" id="form">
 			<!-- Title -->
@@ -102,11 +82,10 @@
 				<label for="ingredients" class="col-sm-3 col-form-label">Ingredients<span class="text-secondary"></label>
 				<div id="ingredientFields" class="col-sm-9">
 					<div class="input-group">
-						<input class="form-control" id="ingredients" placeholder="Ingredient" name="ingredients" required="required"
-							aria-describedby="ingredientsButton"></input>
+						<input class="form-control" id="ingredients" placeholder="Ingredient" name="ingredients"
+							required="required"></input>
 						<div class="input-group-append">
-							<button class="btn btn-outline-secondary" type="button" id="ingredientsButton"
-								onclick="addIngredientField()">+</button>
+							<button class="btn btn-success ingredientsAddButton" type="button">Add</button>
 						</div>
 					</div>
 				</div>
@@ -116,11 +95,9 @@
 				<label for="method" class="col-sm-3 col-form-label">Method<span class="text-secondary"></label>
 				<div id="methodFields" class="col-sm-9">
 					<div class="input-group">
-						<input class="form-control" id="method" placeholder="Step" name="method" required="required"
-							aria-describedby="methodButton"></input>
+						<input class="form-control" id="method" placeholder="Step" name="method" required="required"></input>
 						<div class="input-group-append">
-							<button class="btn btn-outline-secondary" type="button" id="methodButton"
-								onclick="addMethodField()">+</button>
+							<button class="btn btn-success methodAddButton" type="button">Add</button>
 						</div>
 					</div>
 				</div>
@@ -128,10 +105,34 @@
 			<!-- Submit -->
 			<div class="form-group row">
 				<div class="col-sm-10">
-					<button type="submit" class="btn btn-primary" id="submit" onsubmit="return false">Add recipe</button>
+					<button type="submit" class="btn btn-primary" id="submit" onsubmit="return false">Add
+						recipe</button>
 				</div>
 			</div>
 		</form>
+
+		<script>
+
+			$(document).on('click', '.ingredientsAddButton', function () {
+				var html =
+					`<div class="ingredientSection input-group mt-2"><input class="form-control" id="ingredients" placeholder="Ingredient" name="ingredients" required="required"></input><div class="input-group-append"><button class="btn btn-outline-danger ingredientsRemoveButton" type="button">×</button></div>`
+				$("#ingredientFields").append(html)
+			});
+
+			$(document).on("click", ".ingredientsRemoveButton", function () {
+				$(this).closest(".ingredientSection").remove()
+			})
+
+			$(document).on("click", ".methodAddButton", function () {
+				var html = `<div class="methodSection input-group mt-2"><input class="form-control" id="method" placeholder="Step" name="method" required="required"></input><div class="input-group-append"><button class="btn btn-outline-danger methodRemoveButton" type="button">×</button></div>`
+				$("#methodFields").append(html)
+			})
+
+			$(document).on("click", ".methodRemoveButton", function () {
+				$(this).closest(".methodSection").remove()
+			})
+			
+		</script>
 
 		<script>
 			// Submit html form to express.js server
@@ -140,7 +141,7 @@
 				$("#form").submit(function (event) {
 
 					// Prevent webpage reload
-					// event.preventDefault();
+					event.preventDefault();
 
 					data = $(this).serializeArray();
 					console.log(data);
